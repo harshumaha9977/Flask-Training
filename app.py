@@ -16,7 +16,7 @@ def register():
         name = request.form.get('name')
         email = request.form.get('email')
         password = request.form.get('password')
-        
+
         # Store user in users list
         user = {
             'name': name,
@@ -24,10 +24,10 @@ def register():
             'password': password
         }
         users.append(user)
-        
+
         # PRG Pattern: Redirect to success page after POST
         return redirect(url_for('registration_success', name=name, email=email))
-    
+
     return render_template("registration.html")
 
 @app.route('/registration/success')
@@ -42,7 +42,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        
+
         # Check if user exists
         for user in users:
             if user['email'] == email and user['password'] == password:
@@ -50,9 +50,9 @@ def login():
                 session['email'] = user['email']
                 # PRG Pattern: Redirect to profile after login
                 return redirect(url_for('profile'))
-        
+
         return "Invalid email or password!"
-    
+
     return render_template("login.html")
 
 @app.route('/profile')
