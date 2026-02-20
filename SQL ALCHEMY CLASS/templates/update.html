@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Member</title>
+</head>
+<body>
+    <h1>Update Member</h1>
+    <p><a href="/">Back to Inventory</a></p>
+    
+    <h2>Update Details for: {{ item.name }}</h2>
+    
+    <form action="/update/{{ item.id }}" method="POST">
+        <p>Name: <input type="text" name="name" value="{{ item.name }}" required></p>
+        <p>Role: <input type="text" name="role" value="{{ item.role }}" required></p>
+        <p>Enrollment Number: <input type="text" name="enrollment" value="{{ item.enrollment }}" required></p>
+        <button type="submit">Save Changes</button>
+        <a href="/">Cancel</a>
+    </form>
+</body>
+</html>
+

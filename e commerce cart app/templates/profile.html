@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>User Profile</h1>
+
+<div class="card">
+    <h3>Username: {{ user.username }}</h3>
+</div>
+
+<h2 style="margin-top:30px;">Your Orders</h2>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="card">
+            <p>Order ID: {{ order.id }}</p>
+            <p>Total Amount: ₹{{ order.total_amount }}</p>
+            <p>Date: {{ order.created_at }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No orders placed yet.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Authentication</title>
+</head>
+<body>
+    <h1>User Authentication System</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    {% if page == 'register' %}
+        <h2>Register</h2>
+        <form method="POST" action="/register">
+            <label>Username: <input type="text" name="username" required></label><br><br>
+            <label>Password: <input type="password" name="password" required></label><br><br>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    
+    {% elif page == 'login' %}
+        <h2>Login</h2>
+        <form method="POST" action="/login">
+            <label>Username: <input type="text" name="username" required></label><br><br>
+            <label>Password: <input type="password" name="password" required></label><br><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/register">Register</a></p>
+    
+    {% else %}
+        <h2>Welcome, {{ username }}!</h2>
+        <p><a href="/create_post">Create Post</a> | <a href="/posts">View Posts</a> | <a href="/logout">Logout</a></p>
+    {% endif %}
+    
+    {% if page == 'create_post' %}
+        <h2>Create Post</h2>
+        <form method="POST" action="/create_post">
+            <label>Title: <input type="text" name="title" required></label><br><br>
+            <label>Content: <textarea name="content" required></textarea></label><br><br>
+            <button type="submit">Create Post</button>
+        </form>
+        <p><a href="/posts">View My Posts</a> | <a href="/">Home</a></p>
+    
+    {% elif page == 'view_posts' %}
+        <h2>My Posts</h2>
+        {% if posts %}
+            {% for post in posts %}
+                <div style="border:1px solid #5cbb68; padding:10px; margin:10px 0;">
+                    <h3>{{ post[1] }}</h3>
+                    <p>{{ post[2] }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts yet.</p>
+        {% endif %}
+        <p><a href="/create_post">Create New Post</a> | <a href="/">Home</a></p>
+    {% endif %}
+</body>
+</html>
+
